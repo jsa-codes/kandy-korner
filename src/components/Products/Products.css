@@ -1,0 +1,12 @@
+.products {
+    display: flex;
+    flex-direction: column;
+}
+
+.product {
+    background-color: rgb(211, 191, 230);
+    border: 1px solid darkmagenta;
+    padding: 0.7rem;
+    margin: 0.5rem 0;
+    border-radius: 2px;
+}

@@ -5,11 +5,11 @@ import "./ProductForm.css"
 
 export const ProductForm = () => {
 
-    const [productTypes, setTypes] = useState([])
+    const [productTypes, setProductTypes] = useState([])
 
     const [product, update] = useState({
             productName: "",
-            productTypeId: (0),
+            productTypeId: "",
             unitPrice: ""
             
         })
@@ -23,7 +23,7 @@ export const ProductForm = () => {
             fetch(`http://localhost:8088/productTypes`)
             .then(response => response.json())
             .then((productTypeArray) => {
-                setTypes(productTypeArray)
+                setProductTypes(productTypeArray)
             }
 
             )
@@ -89,21 +89,23 @@ export const ProductForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="name">Type:</label>
-                   
-                        <select>value={product.productTypeId}
-                        onChange={
+                        <select onChange={
                             (event) => {
                                 const copy = {...product}
-                                copy.productTypeId = event.target.checked
+                                copy.productTypeId = event.target.value
                                 update(copy)
                             }
+                        }>
+                   {
+                    productTypes.map(
+                        (type) => {
+                            return <option value={type.id}>{type.type}</option>
                         }
-
-                        <option value="0">Choose from the following:</option>
-                        <option value="1">Hard Candy</option>
-                        <option value="2">Gum</option>
-                        <option value="3">Chocolate</option>
-                        <option value="4">Sodas</option>
+                    )
+                   }
+                       
+                        
+                        
                         </select>
                 </div>
             </fieldset>

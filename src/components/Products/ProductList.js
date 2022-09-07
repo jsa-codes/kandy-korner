@@ -75,12 +75,12 @@ export const ProductList = () => {
 
         <article className='products'>
         {
-            products.map(
+            filteredProducts.map(
                 (product) => {
                     return <section className="product" key={`product--${product.id}`}>
                     <header>Product: {product.productName}</header>
                     <p>Price: ${product.unitPrice}</p>
-                    <footer>Candy Type: {product.productType.type}</footer>
+                    <footer>Candy Type: {product?.productType?.type}</footer>
                     </section>
                 }
             )

@@ -1,21 +1,15 @@
-import { Outlet, Route, Routes } from "react-router-dom"
-import { LocationList } from "../locations/LocationList"
+import { CustomerViews } from './CustomerViews'
+import { EmployeeViews } from './EmployeeViews'
 
+// This is the overall view of the Application and is dependent upon the type of user.
 export const ApplicationViews = () => {
-	return (
-        <Routes>
-            <Route path="/" element={
-                <>
-                    <h1>Kandy Korner Kush Shop</h1>
-                    <div>Your one-stop-shop to get all your kush kandy</div>
 
-                    <Outlet />
-                </>
-            }>
+    const localKandyUser = localStorage.getItem("kandy_user")
+    const kandyUserObject = JSON.parse(localKandyUser)
 
-                <Route path="locations" element={ <LocationList /> } />
-            </Route>
-        </Routes>
-    )
+    if (kandyUserObject.staff) {
+        return <EmployeeViews />
+    } else {
+        return <CustomerViews />   
+    }
 }
-
